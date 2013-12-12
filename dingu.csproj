@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BED6EFC9-678B-4F88-A129-D062D1845F57}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>statsdnet_javascript_client</RootNamespace>
+    <AssemblyName>statsdnet-javascript-client</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bower_components\jquery\.bower.json" />
+    <Content Include="bower_components\jquery\.gitignore" />
+    <Content Include="bower_components\jquery\bower.json" />
+    <Content Include="bower_components\jquery\component.json" />
+    <Content Include="bower_components\jquery\composer.json" />
+    <Content Include="bower_components\jquery\jquery.min.map" />
+    <Content Include="bower_components\jquery\package.json" />
+    <Content Include="bower_components\jquery\README.md" />
+    <Content Include="bower_components\qunit\.bower.json" />
+    <Content Include="bower_components\qunit\.gitignore" />
+    <Content Include="bower_components\qunit\.jshintrc" />
+    <Content Include="bower_components\qunit\.mailmap" />
+    <Content Include="bower_components\qunit\.travis.yml" />
+    <Content Include="bower_components\qunit\addons\.jshintrc" />
+    <Content Include="bower_components\qunit\addons\phantomjs\README.md" />
+    <Content Include="bower_components\qunit\CONTRIBUTING.md" />
+    <Content Include="bower_components\qunit\History.md" />
+    <Content Include="bower_components\qunit\package.json" />
+    <Content Include="bower_components\qunit\README.md" />
+    <Content Include="bower_components\qunit\test\.jshintrc" />
+    <Content Include="bower_components\underscore\docs\docco.css" />
+    <Content Include="bower_components\underscore\docs\favicon.ico" />
+    <Content Include="bower_components\underscore\docs\images\background.png" />
+    <Content Include="bower_components\underscore\docs\images\underscore.png" />
+    <Content Include="bower_components\underscore\docs\public\stylesheets\normalize.css" />
+    <Content Include="bower_components\underscore\docs\underscore.html" />
+    <Content Include="bower_components\underscore\favicon.ico" />
+    <Content Include="bower_components\underscore\index.html" />
+    <Content Include="bower_components\underscore\test\arrays.js" />
+    <Content Include="bower_components\underscore\test\chaining.js" />
+    <Content Include="bower_components\underscore\test\collections.js" />
+    <Content Include="bower_components\underscore\test\functions.js" />
+    <Content Include="bower_components\underscore\test\index.html" />
+    <Content Include="bower_components\underscore\test\objects.js" />
+    <Content Include="bower_components\underscore\test\speed.js" />
+    <Content Include="bower_components\underscore\test\utility.js" />
+    <Content Include="bower_components\underscore\test\vendor\jquery.js" />
+    <Content Include="bower_components\underscore\test\vendor\jslitmus.js" />
+    <Content Include="bower_components\underscore\test\vendor\qunit.css" />
+    <Content Include="bower_components\underscore\test\vendor\qunit.js" />
+    <Content Include="bower_components\underscore\test\vendor\runner.js" />
+    <Content Include="bower_components\underscore\underscore-min.js" />
+    <Content Include="bower_components\underscore\underscore.js" />
+    <Content Include="dingu.js" />
+    <Content Include="LICENCE.txt" />
+    <Content Include="statsdnet-client.js" />
+    <Content Include="tests\fake-jquery.js" />
+    <Content Include="tests\index.html" />
+    <Content Include="tests\tests.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bower_components\jquery\jquery-migrate.js" />
+    <Content Include="bower_components\jquery\jquery-migrate.min.js" />
+    <Content Include="bower_components\jquery\jquery.js" />
+    <Content Include="bower_components\jquery\jquery.min.js" />
+    <Content Include="bower_components\qunit\addons\phantomjs\runner.js" />
+    <Content Include="bower_components\qunit\AUTHORS.txt" />
+    <Content Include="bower_components\qunit\Gruntfile.js" />
+    <Content Include="bower_components\qunit\MIT-LICENSE.txt" />
+    <Content Include="bower_components\qunit\qunit\qunit.css" />
+    <Content Include="bower_components\qunit\qunit\qunit.js" />
+    <Content Include="bower_components\qunit\test\async.html" />
+    <Content Include="bower_components\qunit\test\async.js" />
+    <Content Include="bower_components\qunit\test\deepEqual.js" />
+    <Content Include="bower_components\qunit\test\headless.html" />
+    <Content Include="bower_components\qunit\test\index.html" />
+    <Content Include="bower_components\qunit\test\logs.html" />
+    <Content Include="bower_components\qunit\test\logs.js" />
+    <Content Include="bower_components\qunit\test\narwhal-test.js" />
+    <Content Include="bower_components\qunit\test\node-test.js" />
+    <Content Include="bower_components\qunit\test\setTimeout.html" />
+    <Content Include="bower_components\qunit\test\setTimeout.js" />
+    <Content Include="bower_components\qunit\test\swarminject.js" />
+    <Content Include="bower_components\qunit\test\test.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bower.json" />
+    <Content Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bower_components\underscore\.bower.json" />
+    <Content Include="bower_components\underscore\.gitignore" />
+    <Content Include="bower_components\underscore\.travis.yml" />
+    <Content Include="bower_components\underscore\CNAME" />
+    <Content Include="bower_components\underscore\CONTRIBUTING.md" />
+    <Content Include="bower_components\underscore\docs\public\fonts\aller-bold.eot" />
+    <Content Include="bower_components\underscore\docs\public\fonts\aller-bold.ttf" />
+    <Content Include="bower_components\underscore\docs\public\fonts\aller-bold.woff" />
+    <Content Include="bower_components\underscore\docs\public\fonts\aller-light.eot" />
+    <Content Include="bower_components\underscore\docs\public\fonts\aller-light.ttf" />
+    <Content Include="bower_components\underscore\docs\public\fonts\aller-light.woff" />
+    <Content Include="bower_components\underscore\docs\public\fonts\novecento-bold.eot" />
+    <Content Include="bower_components\underscore\docs\public\fonts\novecento-bold.ttf" />
+    <Content Include="bower_components\underscore\docs\public\fonts\novecento-bold.woff" />
+    <Content Include="bower_components\underscore\LICENSE" />
+    <Content Include="bower_components\underscore\package.json" />
+    <Content Include="bower_components\underscore\Rakefile" />
+    <Content Include="bower_components\underscore\README.md" />
+    <Content Include="bower_components\underscore\underscore-min.map" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55214</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55214/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

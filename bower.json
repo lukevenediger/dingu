@@ -1,0 +1,28 @@
+{
+  "name": "statsdnet-javascript-client",
+  "version": "1.0.0",
+  "homepage": "https://github.com/lukevenediger/statsdnet-javascript-client",
+  "authors": [
+    "Luke Venediger <lukev@lukev.net>"
+  ],
+  "description": "Helps javascript applications log metrics to statsd.net's http endpoint",
+  "main": "statsdnet-client.js",
+  "keywords": [
+    "statsd.net",
+    "statsd",
+    "graphite",
+    "metrics",
+    "client"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7.2"
+  }
+}
