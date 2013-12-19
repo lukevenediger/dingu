@@ -84,11 +84,14 @@ dingu.module('apiClient', function(apiUrl, systemInfo) {
 ```
 
 ## Download and Install
-
+There are many ways to get dingu:
+* Grab the latest release from the [Github Release page](https://github.com/lukevenediger/dingu/releases)
+* Download [dingu.js](https://raw.github.com/lukevenediger/dingu/49c219ee5fb2ad9d2e0593bfe3507e7ce2504c71/dingu.js)  or [dingu.min.js](https://raw.github.com/lukevenediger/dingu/49c219ee5fb2ad9d2e0593bfe3507e7ce2504c71/dingu.min.js)
+* Install using [bower](http://bower.io): bower install dingu
 
 ## Project Information
 
-Maintainer:
+Maintainers:
 * Luke Venediger - <a href="mailto:lukev@lukev.net">lukev@lukev.net</a>
 
 License:
