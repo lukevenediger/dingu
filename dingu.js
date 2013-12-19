@@ -1,6 +1,6 @@
 ﻿/**
  * dingu.js - an AngularJS-style dependency injection system
- * Version: 1.0
+ * Version: 1.0.1
  * (C) 2013 Luke Venediger 
  * Released under the MIT license. 
  * Github home page: https://github.com/lukevenediger/dingu - includes usage examples
