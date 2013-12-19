@@ -1,6 +1,6 @@
 {
   "name": "dingu",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "homepage": "https://github.com/lukevenediger/dingu",
   "authors": [
     "Luke Venediger <lukev@lukev.net>"
@@ -21,7 +21,5 @@
     "bower_components",
     "test",
     "tests"
-  ],
-  "dependencies": {
-  }
+  ]
 }
