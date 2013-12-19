@@ -10,6 +10,7 @@ when needed.
 * Load your javascript files in any arbitrary order
 * Store singleton instances
 * Store constant values like settings and magic numbers
+* Protects against circular dependencies
 
 ## How It Works
 
@@ -80,6 +81,10 @@ dingu.value('systemInfo', {
 dingu.module('apiClient', function(apiUrl, systemInfo) {
   // profit!
 });
+```
+
+## Download and Install
+
 
 ## Project Information
 

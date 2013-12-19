@@ -53,18 +53,19 @@
             }
         });
 
+        var dependencies;
         switch (registryItem.type) {
             case RegistryItemType.VALUE:
                 // Nothing to do - this was set already
                 break;
             case RegistryItemType.SINGLETON:
                 if (!registryItem.value) {
-                    var dependencies = resolveDependencies(registryItem.dependencyNames, dependencyChain.concat(registryItem.name));
+                    dependencies = resolveDependencies(registryItem.dependencyNames, dependencyChain.concat(registryItem.name));
                     registryItem.value = registryItem.target.apply(registryItem.target, dependencies);
                 }
                 break;
             case RegistryItemType.INSTANCE:
-                var dependencies = resolveDependencies(registryItem.dependencyNames, dependencyChain.concat(registryItem.name));
+                dependencies = resolveDependencies(registryItem.dependencyNames, dependencyChain.concat(registryItem.name));
                 registryItem.value = registryItem.target.apply(registryItem.target, dependencies);
                 break;
         }

@@ -5,7 +5,7 @@
   "authors": [
     "Luke Venediger <lukev@lukev.net>"
   ],
-  "description": "Provides easy dependency injection through named function parameters, similar to AngularJS"
+  "description": "Provides easy dependency injection through named function parameters, similar to AngularJS",
   "main": "dingu-v1.0.js",
   "keywords": [
     "ioc",
