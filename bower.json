@@ -1,18 +1,18 @@
 {
-  "name": "statsdnet-javascript-client",
+  "name": "dingu",
   "version": "1.0.0",
-  "homepage": "https://github.com/lukevenediger/statsdnet-javascript-client",
+  "homepage": "https://github.com/lukevenediger/dingu",
   "authors": [
     "Luke Venediger <lukev@lukev.net>"
   ],
-  "description": "Helps javascript applications log metrics to statsd.net's http endpoint",
-  "main": "statsdnet-client.js",
+  "description": "Provides easy dependency injection through named function parameters, similar to AngularJS"
+  "main": "dingu-v1.0.js",
   "keywords": [
-    "statsd.net",
-    "statsd",
-    "graphite",
-    "metrics",
-    "client"
+    "ioc",
+    "di",
+    "angular",
+    "angularjs",
+    "framework"
   ],
   "license": "MIT",
   "ignore": [
@@ -23,6 +23,5 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": ">=1.7.2"
   }
 }

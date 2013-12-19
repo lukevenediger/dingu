@@ -1,5 +1,9 @@
 ﻿/**
  * dingu.js - an AngularJS-style dependency injection system
+ * Version: 1.0
+ * (C) 2013 Luke Venediger 
+ * Released under the MIT license. 
+ * Github home page: https://github.com/lukevenediger/dingu - includes usage examples
  */
 (function () {
     var root = this;
@@ -105,6 +109,7 @@
 
     /**
      * Return a registry item.
+     * @param {string} itemName
      */
     dingu.get = function (itemName) {
         if (!registry.hasOwnProperty(itemName)) {
