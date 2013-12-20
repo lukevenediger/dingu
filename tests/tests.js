@@ -193,7 +193,8 @@ test('Retrieve a value from the registry.', function () {
     equal(dingu.get('foo'), 123, 'Value was stored and retrieved');
 });
 
-test('Module injection still works in minification mode', function() {
+test('Module injection still works in minification mode', function () {
+    dingu.reset();
     dingu.module('ModuleA', ['ModuleB', function (ModuleB) {
         return {
             doSomething: function () {
@@ -212,4 +213,31 @@ test('Module injection still works in minification mode', function() {
 
     var a = dingu.get('ModuleA');
     equal(a.doSomething(), 'Hi from ModuleA (Hi from ModuleB)');
+});
+
+test('Singleton supports minification', function() {
+    dingu.reset();
+    
+    dingu.singleton('SingletonA', ['ModuleA', function (ModuleA) {
+        var startingValue = 0;
+        return {
+            identify: function () {
+                startingValue += 1;
+                return startingValue + ' (' + ModuleA.doSomething() + ')';
+            }
+        };
+    }]);
+
+    dingu.module('ModuleA', function () {
+        return {
+            doSomething: function () {
+                return 'ModuleA';
+            }
+        };
+    });
+
+    var singleton1 = dingu.get('SingletonA');
+    equal(singleton1.identify(), '1 (ModuleA)');
+    var singleton2 = dingu.get('SingletonA');
+    equal(singleton2.identify(), '2 (ModuleA)');
 });

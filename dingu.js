@@ -86,6 +86,23 @@
         });
     };
 
+    /**
+     * Helper to map a module/singleton arguments if an array was provided
+     */
+    dingu.extractMethodInformation = function (methodArgument) {
+        var argumentArray = undefined; // UNDEFINED if the module is not an ARRAY
+        var moduleFn = methodArgument; // Last element in the array (i.e. Angular style)
+        if (methodArgument instanceof Array) {
+            moduleFn = methodArgument.pop();
+            argumentArray = methodArgument;
+        }
+
+        return {
+            fn: moduleFn,
+            args: argumentArray
+        };
+    };
+
     /** 
      * Registers a new module
      * 
@@ -93,15 +110,8 @@
      * @param {function} module
      */
     dingu.module = function(name, module) {
-        // Minification logic mapping for "dingu modules"
-        var argumentArray = undefined; // UNDEFINED if the module is not an ARRAY
-        var moduleFn = module; // Last element in the array (i.e. Angular style)
-        if (module instanceof Array) {
-            moduleFn = module.pop();
-            argumentArray = module;
-        }
-
-        registry[name] = new dingu.types.RegistryItem(name, moduleFn, RegistryItemType.INSTANCE, argumentArray);
+        var moduleInfo = dingu.extractMethodInformation(module);
+        registry[name] = new dingu.types.RegistryItem(name, moduleInfo.fn, RegistryItemType.INSTANCE, moduleInfo.args);
     };
 
     /**
@@ -110,8 +120,9 @@
      * @param {string} name
      * @param {function} singleton - a factory function that builds the singleton
      */
-    dingu.singleton = function(name, singleton) {
-        registry[name] = new dingu.types.RegistryItem(name, singleton, RegistryItemType.SINGLETON);
+    dingu.singleton = function (name, singleton) {
+        var singletonInfo = dingu.extractMethodInformation(singleton);
+        registry[name] = new dingu.types.RegistryItem(name, singletonInfo.fn, RegistryItemType.SINGLETON, singletonInfo.args);
     };
 
     dingu.value = function(name, value) {
