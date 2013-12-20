@@ -1,6 +1,6 @@
 ﻿/**
  * dingu.js - an AngularJS-style dependency injection system
- * Version: 1.0.1
+ * Version: 1.0.2
  * (C) 2013 Luke Venediger 
  * Released under the MIT license. 
  * Github home page: https://github.com/lukevenediger/dingu - includes usage examples
@@ -45,7 +45,10 @@
     };
 
     /**
-     * Resolve a regisrty item to an instance.     
+     * Resolve a registry item to an instance.     
+     * @param {dingu.types.RegistryItem} registryItem
+     * @param {Array.<string>} dependencyChain
+     * @returns {MIXED} the result
      */
     var resolve = function(registryItem, dependencyChain) {
         // Check for circular dependencies
@@ -57,19 +60,19 @@
 
         var dependencies;
         switch (registryItem.type) {
-        case RegistryItemType.VALUE:
-            // Nothing to do - this was set already
-            break;
-        case RegistryItemType.SINGLETON:
-            if (!registryItem.value) {
+            case RegistryItemType.VALUE:
+                // Nothing to do - this was set already
+                break;
+            case RegistryItemType.SINGLETON:
+                if (!registryItem.value) {
+                    dependencies = resolveDependencies(registryItem.dependencyNames, dependencyChain.concat(registryItem.name));
+                    registryItem.value = registryItem.target.apply(registryItem.target, dependencies);
+                }
+                break;
+            case RegistryItemType.INSTANCE:
                 dependencies = resolveDependencies(registryItem.dependencyNames, dependencyChain.concat(registryItem.name));
                 registryItem.value = registryItem.target.apply(registryItem.target, dependencies);
-            }
-            break;
-        case RegistryItemType.INSTANCE:
-            dependencies = resolveDependencies(registryItem.dependencyNames, dependencyChain.concat(registryItem.name));
-            registryItem.value = registryItem.target.apply(registryItem.target, dependencies);
-            break;
+                break;
         }
         return registryItem.value;
     };
@@ -88,9 +91,11 @@
 
     /**
      * Helper to map a module/singleton arguments if an array was provided
+     * @param methodArgument 
+     * @returns
      */
-    dingu.extractMethodInformation = function (methodArgument) {
-        var argumentArray = undefined; // UNDEFINED if the module is not an ARRAY
+    var extractMethodInformation = function (methodArgument) {
+        var argumentArray; // UNDEFINED if the module is not an ARRAY
         var moduleFn = methodArgument; // Last element in the array (i.e. Angular style)
         if (methodArgument instanceof Array) {
             moduleFn = methodArgument.pop();
@@ -110,7 +115,7 @@
      * @param {function} module
      */
     dingu.module = function(name, module) {
-        var moduleInfo = dingu.extractMethodInformation(module);
+        var moduleInfo = extractMethodInformation(module);
         registry[name] = new dingu.types.RegistryItem(name, moduleInfo.fn, RegistryItemType.INSTANCE, moduleInfo.args);
     };
 
@@ -121,10 +126,15 @@
      * @param {function} singleton - a factory function that builds the singleton
      */
     dingu.singleton = function (name, singleton) {
-        var singletonInfo = dingu.extractMethodInformation(singleton);
+        var singletonInfo = extractMethodInformation(singleton);
         registry[name] = new dingu.types.RegistryItem(name, singletonInfo.fn, RegistryItemType.SINGLETON, singletonInfo.args);
     };
 
+    /**
+     * Register a value in the container
+     * @param {string} name
+     * @param {string|Number|Object|Array} value
+     */
     dingu.value = function(name, value) {
         registry[name] = new dingu.types.RegistryItem(name, value, RegistryItemType.VALUE);
     };
@@ -185,7 +195,6 @@
             '->' +
             rootItem.name;
     };
-
     dingu.types.CircularDependencyError.prototype.toString = function() {
         return this.message;
     };
@@ -199,7 +208,6 @@
         this.item = item;
         this.message = 'Could not find an item called ' + item + ' in the registry.';
     };
-
     dingu.types.ItemNotFoundError.prototype.toString = function() {
         return this.message;
     };

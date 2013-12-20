@@ -94,5 +94,8 @@ There are many ways to get dingu:
 Maintainers:
 * Luke Venediger - <a href="mailto:lukev@lukev.net">lukev@lukev.net</a>
 
+Contributors:
+* [Richard Niemand](https://github.com/niemandr)
+
 License:
 * MIT

@@ -101,7 +101,11 @@
     <Content Include="bower_components\underscore\underscore-min.js" />
     <Content Include="bower_components\underscore\underscore.js" />
     <Content Include="dingu.js" />
+    <Content Include="dingu.min.js">
+      <DependentUpon>dingu.js</DependentUpon>
+    </Content>
     <Content Include="LICENCE.txt" />
+    <Content Include="tests\tests-minified.html" />
     <Content Include="tests\minification-test.html" />
     <Content Include="statsdnet-client.js" />
     <Content Include="tests\fake-jquery.js" />
@@ -110,6 +114,7 @@
     <Content Include="tests\minification-test.min.js">
       <DependentUpon>minification-test.js</DependentUpon>
     </Content>
+    <Content Include="tests\tests.html" />
     <Content Include="tests\tests.js" />
   </ItemGroup>
   <ItemGroup>
@@ -166,12 +171,18 @@
     <Content Include="bower_components\underscore\underscore-min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="tests\tests.min.js">
+      <DependentUpon>tests.js</DependentUpon>
+    </Content>
     <Content Include="web.config" />
     <Content Include="tests\minification-test.min.js.map">
       <DependentUpon>minification-test.js</DependentUpon>
     </Content>
     <Content Include="dingu.min.js.map">
       <DependentUpon>dingu.js</DependentUpon>
+    </Content>
+    <Content Include="tests\tests.min.js.map">
+      <DependentUpon>tests.js</DependentUpon>
     </Content>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
@@ -191,7 +202,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55214</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
