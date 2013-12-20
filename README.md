@@ -88,6 +88,7 @@ There are many ways to get dingu:
 * Grab the latest release from the [Github Release page](https://github.com/lukevenediger/dingu/releases)
 * Download [dingu.js](https://raw.github.com/lukevenediger/dingu/49c219ee5fb2ad9d2e0593bfe3507e7ce2504c71/dingu.js)  or [dingu.min.js](https://raw.github.com/lukevenediger/dingu/49c219ee5fb2ad9d2e0593bfe3507e7ce2504c71/dingu.min.js)
 * Install using [bower](http://bower.io): bower install dingu
+* Install using nuget: package id is dingu.js. https://www.nuget.org/packages/dingu.js/
 
 ## Project Information
 
