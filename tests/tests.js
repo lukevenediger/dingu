@@ -192,3 +192,24 @@ test('Retrieve a value from the registry.', function () {
     dingu.value('foo', 123);
     equal(dingu.get('foo'), 123, 'Value was stored and retrieved');
 });
+
+test('Module injection still works in minification mode', function() {
+    dingu.module('ModuleA', ['ModuleB', function (ModuleB) {
+        return {
+            doSomething: function () {
+                return 'Hi from ModuleA (' + ModuleB.doSomething() + ')';
+            }
+        };
+    }]);
+
+    dingu.module('ModuleB', function () {
+        return {
+            doSomething: function () {
+                return 'Hi from ModuleB';
+            }
+        };
+    });
+
+    var a = dingu.get('ModuleA');
+    equal(a.doSomething(), 'Hi from ModuleA (Hi from ModuleB)');
+});

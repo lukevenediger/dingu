@@ -25,7 +25,7 @@ dingu.module('ModuleA', function(ModuleB) {
   };
 });
 
-dingu.module('ModuleB', function()) {
+dingu.module('ModuleB', function() {
   return {
     doSomething: function() {
       return 'Hi from ModuleB';
