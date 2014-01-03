@@ -58,8 +58,8 @@ dingu.singleton('OneOnly', function() {
   }
 });
 
-console.log(dingu.get('OneOnly').nextID === 1); // true
-console.log(dingu.get('OneOnly').nextID === 2); // true
+console.log(dingu.get('OneOnly').nextID() === 1); // true
+console.log(dingu.get('OneOnly').nextID() === 2); // true
  ```
 
 *Example 3: Storing Constant Values*
