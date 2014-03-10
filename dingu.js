@@ -1,12 +1,13 @@
 ﻿/**
  * dingu.js - an AngularJS-style dependency injection system
- * Version: 1.0.2
+ * Version: 1.1.0
  * (C) 2013 Luke Venediger 
  * Released under the MIT license. 
  * Github home page: https://github.com/lukevenediger/dingu - includes usage examples
  */
 (function() {
     var root = this;
+    var locked = false;
     var dingu = {};
     var registry = {};
     dingu.types = {};
@@ -115,6 +116,9 @@
      * @param {function} module
      */
     dingu.module = function(name, module) {
+        if (locked) {
+            return;
+        }
         var moduleInfo = extractMethodInformation(module);
         registry[name] = new dingu.types.RegistryItem(name, moduleInfo.fn, RegistryItemType.INSTANCE, moduleInfo.args);
     };
@@ -126,6 +130,9 @@
      * @param {function} singleton - a factory function that builds the singleton
      */
     dingu.singleton = function (name, singleton) {
+        if (locked) {
+            return;
+        }
         var singletonInfo = extractMethodInformation(singleton);
         registry[name] = new dingu.types.RegistryItem(name, singletonInfo.fn, RegistryItemType.SINGLETON, singletonInfo.args);
     };
@@ -136,16 +143,24 @@
      * @param {string|Number|Object|Array} value
      */
     dingu.value = function(name, value) {
+        if (locked) {
+            return;
+        }
         registry[name] = new dingu.types.RegistryItem(name, value, RegistryItemType.VALUE);
     };
 
     /**
      * Return a registry item.
      * @param {string} itemName
+     * @param {boolean} [supressItemNotFoundError=false] true if you don't want an error to be thrown when an item is not found
      */
-    dingu.get = function(itemName) {
+    dingu.get = function(itemName, supressItemNotFoundError) {
         if (!registry.hasOwnProperty(itemName)) {
-            throw new Error('Item not found: ' + itemName + ' - was it registered?');
+            if (supressItemNotFoundError) {
+                return undefined;
+            } else {
+                throw new dingu.types.ItemNotFoundError(itemName);
+            }
         }
         return resolve(registry[itemName], []);
     };
@@ -154,7 +169,17 @@
      * Clears out all dependencies from the DI registry
      */
     dingu.reset = function() {
+        if (locked) {
+            return;
+        }
         registry = {};
+    };
+
+    /**
+     * Locks dingu and prevents any changes being made
+     */
+    dingu.lock = function () {
+        locked = true;
     };
 
 
@@ -206,7 +231,7 @@
      */
     dingu.types.ItemNotFoundError = function(item) {
         this.item = item;
-        this.message = 'Could not find an item called ' + item + ' in the registry.';
+        this.message = 'Item not found: ' + item + ' - was it registered?';
     };
     dingu.types.ItemNotFoundError.prototype.toString = function() {
         return this.message;
@@ -223,5 +248,12 @@
     };
 
     var RegistryItemType = dingu.lookups.RegistryItemType;
+
+    // Give the test harness a way to reset the lock status
+    if (window.testHarness) {
+        testHarness.resetLockStatus = function () {
+            locked = false;
+        };
+    }
 
 }).call(this);

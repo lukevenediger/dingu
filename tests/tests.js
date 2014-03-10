@@ -2,8 +2,13 @@
 /// <reference path="../bower_components/qunit/qunit/qunit.js" />
 /// <reference path="../dingu.js" />
 
-test('Register a single module and fetch it.', function () {
+var reset = function () {
+    window.testHarness.resetLockStatus();
     dingu.reset();
+};
+
+test('Register a single module and fetch it.', function () {
+    reset();
     dingu.module('ModuleA', function () {
         return {
             identify: function () {
@@ -17,7 +22,7 @@ test('Register a single module and fetch it.', function () {
 });
 
 test('Register two modules with one that depends on the other.', function() {
-    dingu.reset();
+    reset();
     dingu.module('ModuleA', function () {
         return {
             identify: function () {
@@ -44,7 +49,7 @@ test('Register two modules with one that depends on the other.', function() {
 });
 
 test('Register three modules, with one depending on the other two.', function () {
-    dingu.reset();
+    reset();
     dingu.module('ModuleA', function () {
         return {
             identify: function () {
@@ -78,7 +83,7 @@ test('Register three modules, with one depending on the other two.', function ()
 });
 
 test('Register a function that has a comment in the declaration', function () {
-    dingu.reset();
+    reset();
     dingu.module('ModuleA', function (/* a comment */) {
         return {
             me: function() { return 'ModuleA'; }
@@ -89,7 +94,7 @@ test('Register a function that has a comment in the declaration', function () {
 });
 
 test('Register two functions that have comments in their declarations.', function() {
-    dingu.reset();
+    reset();
     dingu.module('ModuleA', function (/* a comment */) {
         return {
             me: function() { return 'ModuleA'; }
@@ -110,7 +115,7 @@ test('Register two functions that have comments in their declarations.', functio
 });
 
 test('Register a function that has a multi-line parameter declaration.', function () {
-    dingu.reset();
+    reset();
     dingu.module('ModuleA',
         function (
             ModuleB,
@@ -127,7 +132,7 @@ test('Register a function that has a multi-line parameter declaration.', functio
 });
 
 test('Register a function that has a multi-line parameter declaration with comments.', function () {
-    dingu.reset();
+    reset();
     dingu.module('ModuleA',
         function (
             // This is a comment
@@ -146,7 +151,7 @@ test('Register a function that has a multi-line parameter declaration with comme
 });
 
 test('Register a singleton and check that it only instantiates once.', function () {
-    dingu.reset();
+    reset();
     dingu.singleton('SingletonA', function () {
         var startingValue = 0;
         return {
@@ -164,7 +169,7 @@ test('Register a singleton and check that it only instantiates once.', function 
 });
 
 test('Throw an error if a circular dependency exists.', function () {
-    dingu.reset();
+    reset();
     dingu.module('ModuleA', function (ModuleB) { });
     dingu.module('ModuleB', function (ModuleA) { });
     throws(
@@ -177,7 +182,7 @@ test('Throw an error if a circular dependency exists.', function () {
 });
 
 test('Throw an error if an item is not found.', function () {
-    dingu.reset();
+    reset();
     throws(
         function() {
             dingu.get('DoesNotExist');
@@ -187,14 +192,20 @@ test('Throw an error if an item is not found.', function () {
     );
 });
 
+test('Return undefined if an item is not found and supressItemNotFoundError is true.', function () {
+    reset();
+    var result = dingu.get('DoesNotExist', true);
+    equal(result, undefined);
+});
+
 test('Retrieve a value from the registry.', function () {
-    dingu.reset();
+    reset();
     dingu.value('foo', 123);
     equal(dingu.get('foo'), 123, 'Value was stored and retrieved');
 });
 
 test('Pass a value into another module.', function () {
-    dingu.reset();
+    reset();
     dingu.value('foo', 123);
     dingu.module('ModuleA', ['foo', function (foo) {
         return {
@@ -208,7 +219,7 @@ test('Pass a value into another module.', function () {
 });
 
 test('Module injection still works in minification mode', function () {
-    dingu.reset();
+    reset();
     dingu.module('ModuleA', ['ModuleB', function (ModuleB) {
         return {
             doSomething: function () {
@@ -230,8 +241,7 @@ test('Module injection still works in minification mode', function () {
 });
 
 test('Singleton supports minification', function() {
-    dingu.reset();
-    
+    reset();
     dingu.singleton('SingletonA', ['ModuleA', function (ModuleA) {
         var startingValue = 0;
         return {
@@ -254,4 +264,23 @@ test('Singleton supports minification', function() {
     equal(singleton1.identify(), '1 (ModuleA)');
     var singleton2 = dingu.get('SingletonA');
     equal(singleton2.identify(), '2 (ModuleA)');
+});
+
+test('Lock dingu and try register a Module, Singleton and Value.', function() {
+    reset();
+    dingu.lock();
+    dingu.module('ModuleA', function () { });
+    equal(dingu.get('ModuleA', true), undefined, 'Module was not registered.');
+    dingu.singleton('SingletonA', function () { });
+    equal(dingu.get('SingletonA', true), undefined, 'Singleton was not registered.');
+    dingu.singleton('ValueA', 1);
+    equal(dingu.get('ValueA', true), undefined, 'Value was not registered.');
+});
+
+test('Lock dingu and try reset.', function () {
+    reset();
+    dingu.value('ValueA', 1);
+    dingu.lock();
+    dingu.reset();
+    equal(dingu.get('ValueA'), 1, 'Still got value 1 after locking');
 });

@@ -1,8 +1,9 @@
 # dingu
 
-An angularjs-style dependency injection framework for JavaScript, dingu makes it easy
-to define modules, singletons and constants that are assembled at runtime
-when needed.
+dingu is an angularjs-style dependency injection framework for JavaScript 
+that makes it easy to define modules, singletons and constants. All dependencies
+are resolved on demand, freeing you from loading your code in any particular
+order.
 
 ## Features
 
@@ -11,6 +12,7 @@ when needed.
 * Store singleton instances
 * Store constant values like settings and magic numbers
 * Protects against circular dependencies
+* Can be locked to prevent further changes at runtime.
 
 ## How It Works
 
