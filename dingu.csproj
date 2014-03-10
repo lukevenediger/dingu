@@ -107,7 +107,6 @@
     <Content Include="LICENCE.txt" />
     <Content Include="tests\tests-minified.html" />
     <Content Include="tests\minification-test.html" />
-    <Content Include="statsdnet-client.js" />
     <Content Include="tests\fake-jquery.js" />
     <Content Include="tests\index.html" />
     <Content Include="tests\minification-test.js" />
@@ -174,7 +173,6 @@
     <Content Include="tests\tests.min.js">
       <DependentUpon>tests.js</DependentUpon>
     </Content>
-    <Content Include="web.config" />
     <Content Include="tests\minification-test.min.js.map">
       <DependentUpon>minification-test.js</DependentUpon>
     </Content>
@@ -184,12 +182,6 @@
     <Content Include="tests\tests.min.js.map">
       <DependentUpon>tests.js</DependentUpon>
     </Content>
-    <None Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
-    <None Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
